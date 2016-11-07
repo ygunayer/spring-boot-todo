@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: dev
+
+  datasource:
+    dataSourceClassName: org.h2.jdbcx.JdbcDataSource
+    url: jdbc:h2:mem:todoapi;DB_CLOSE_DELAY=-1
+    username: sa
+    password: 
+
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.H2Dialect
+      ddl-auto: create
+      show_sql: true

@@ -1,0 +1,66 @@
+ext {
+    springBootVersion = '1.4.1.RELEASE'
+    hibernateVersion = '5.2.4.Final'
+    hikaricpVersion = '2.5.1'
+    mysqlVersion = '6.0.5'
+    h2Version = '1.4.193'
+}
+    
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'war'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'spring-boot-todo'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url "https://repo.spring.io/libs-release" }
+}
+
+
+compileJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+compileTestJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-security:$springBootVersion") 
+    compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion") {
+        exclude(group: 'org.hibernate')
+    }
+    
+    compile("org.hibernate:hibernate-core:$hibernateVersion")
+    compile("org.hibernate:hibernate-entitymanager:$hibernateVersion")
+    compile("mysql:mysql-connector-java:$mysqlVersion")
+    compile("com.h2database:h2:$h2Version")
+    
+    //hikari
+    compile("com.zaxxer:HikariCP:$hikaricpVersion") {
+        exclude(module: 'tools')
+    }
+
+    testCompile("junit:junit")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}

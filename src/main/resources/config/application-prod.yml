@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: prod
+
+  datasource:
+    dataSourceClassName: com.mysql.cj.jdbc.MysqlDataSource
+    url: jdbc:mysql://localhost/spring-boot-todo?useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: 
+    initialize: false
+
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.MySQLInnoDBDialect
+      ddl-auto: update
+      show_sql: false
